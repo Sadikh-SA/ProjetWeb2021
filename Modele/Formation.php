@@ -1,22 +1,19 @@
 <?php
 
-    class Utilisateur {
+    class Formation {
 
         private $nom;
         private $prenom;
+        private $tel;
         private $mail;
-        private $password;
         private $role;
-        private $dateCreation;
 
-        public function __construct($nom,$prenom,$mail,$role,$password,$dateCreation)
+        public function __construct($nom="",$prenom="",$tel="",$mail="")
         {
             $this->nom = $nom;
             $this->prenom = $prenom;
-            $this->password = $password;
+            $this->tel = $tel;
             $this->mail = $mail;
-            $this->role = $role;
-            $this->dateCreation = $dateCreation;
         }
 
         public function getNom() {
@@ -40,12 +37,12 @@
         public function SetMail($newmail) {
             $this->mail = $newmail;
         }
-        public function getPassword() {
-            return $this->password;
+        public function getTel() {
+            return $this->tel;
         }
         
-        public function SetPassword($newpassword) {
-            $this->password = $newpassword;
+        public function SetTel($newtel) {
+            $this->tel = $newtel;
         }
 
         public function getRole() {
@@ -54,14 +51,6 @@
         
         public function SetRole($newrole) {
             $this->role = $newrole;
-        }
-
-        public function getDateCreation() {
-            return $this->dateCreation;
-        }
-        
-        public function SetDateCreation($newdateCreation) {
-            $this->dateCreation = $newdateCreation;
         }
 
     }
