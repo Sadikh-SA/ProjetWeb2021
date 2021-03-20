@@ -27,6 +27,14 @@ $pdo = $test->getPDO();
                 <input class="input" type="email" name="mail" placeholder="Email" required />
                 <input class="input" type="password" name="pwd" placeholder="Password" required />
                 <input class="input" type="password" name="pwd1" placeholder="Password" required />
+                <select name="formation" class="input">
+                <?php
+                    $form = $test->findAll("Formation");
+                    while ($row = $form->fetch()) {
+                        echo "<option value='".$row['id']."'>".$row['titre']."</option>";
+                    }
+                ?>
+                </select>
                 <input type="submit" class="button" name="inscrire" value="Inscrire">
             </form>
         </div>
@@ -82,6 +90,7 @@ if (isset($_POST['inscrire'])) {
     $mail = $_POST['mail'];
     $pwd = $_POST['pwd'];
     $pwd1 = $_POST['pwd1'];
+    $idformation = $_POST['formation'];
 
     if ($pwd != $pwd1) {
         echo "<script type='text/javascript'>alert('Les deux mots de passes ne sont pas conforme.');</script>";
@@ -92,8 +101,10 @@ if (isset($_POST['inscrire'])) {
                 return "<script type='text/javascript'>alert('Ce mail existe Déjà.');</script>";
             }
         }
+        $donnee=$test->find("Formation",$idformation);
         $date = date_format(new DateTime('NOW'), 'Y-m-d H:i:s');
-        $user = new Utilisateur($nom, $prenom, $mail, "User", $pwd, $date);
+        $formation=$donnee->fetch();
+        $user = new Utilisateur($nom, $prenom, $mail, "User", $pwd, $date,$formation['id']);
         $insert = $test->add($user);
         if ($insert) {
             echo "<script type='text/javascript'>alert('Inscription réussi.');</script>";

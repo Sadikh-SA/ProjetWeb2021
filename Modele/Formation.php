@@ -2,56 +2,37 @@
 
     class Formation {
 
-        private $nom;
-        private $prenom;
-        private $tel;
-        private $mail;
-        private $role;
+        private $titre;
+        private $description;
+        private $dateCreation;
 
-        public function __construct($nom="",$prenom="",$tel="",$mail="")
+        public function __construct($titre="",$description="",$dateCreation="")
         {
-            $this->nom = $nom;
-            $this->prenom = $prenom;
-            $this->tel = $tel;
-            $this->mail = $mail;
+            $this->titre = $titre;
+            $this->description = $description;
+            $this->dateCreation = $dateCreation;
         }
 
-        public function getNom() {
-            return $this->nom;
+        public function getTitre() {
+            return $this->titre;
         }
         
-        public function SetNom($newnom) {
-            $this->nom = $newnom;
+        public function SetTitre($newtitre) {
+            $this->titre = $newtitre;
         }
-        public function getPrenom() {
-            return $this->prenom;
-        }
-        
-        public function SetPrenom($newprenom) {
-            $this->prenom = $newprenom;
-        }
-        public function getMail() {
-            return $this->mail;
+        public function getDescription() {
+            return $this->description;
         }
         
-        public function SetMail($newmail) {
-            $this->mail = $newmail;
+        public function SetDescription($newdescription) {
+            $this->description = $newdescription;
         }
-        public function getTel() {
-            return $this->tel;
-        }
-        
-        public function SetTel($newtel) {
-            $this->tel = $newtel;
-        }
-
-        public function getRole() {
-            return $this->role;
+        public function getDateCreation() {
+            return $this->dateCreation;
         }
         
-        public function SetRole($newrole) {
-            $this->role = $newrole;
+        public function SetDateCreation($newdateCreation) {
+            $this->dateCreation = $newdateCreation;
         }
-
     }
 ?>

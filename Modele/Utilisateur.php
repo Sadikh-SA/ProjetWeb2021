@@ -8,8 +8,9 @@
         private $password;
         private $role;
         private $dateCreation;
+        private $idFormation;
 
-        public function __construct($nom,$prenom,$mail,$role,$password,$dateCreation)
+        public function __construct($nom,$prenom,$mail,$role,$password,$dateCreation,$idFormation)
         {
             $this->nom = $nom;
             $this->prenom = $prenom;
@@ -17,6 +18,7 @@
             $this->mail = $mail;
             $this->role = $role;
             $this->dateCreation = $dateCreation;
+            $this->idFormation = $idFormation;
         }
 
         public function getNom() {
@@ -62,6 +64,14 @@
         
         public function SetDateCreation($newdateCreation) {
             $this->dateCreation = $newdateCreation;
+        }
+
+        public function getFormation() {
+            return $this->idFormation;
+        }
+        
+        public function SetFormation($newFormation) {
+            $this->idFormation = $newFormation;
         }
 
     }

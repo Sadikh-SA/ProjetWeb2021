@@ -27,15 +27,9 @@ class Service
 
     public function findAll($table)
     {
-        if ($table == "Utilisateur") {
-            $resultat = "SELECT * FROM `Utilisateur`";
+        if ($table == "Utilisateur" || "Formation") {
+            $resultat = "SELECT * FROM $table";
             $res = $this->getPDO()->query($resultat);
-            return $res;
-        } elseif ($table == "Formation") {
-
-            $resultat = "SELECT matricule, nom, prenom, mail, tel, ddn FROM $table , Etudiant where $table.idEtu=Etudiant.idEtu";
-            $res = $this->getPDO()->query($resultat);
-            //$p = $res->fetchAll(pdo::FETCH_ASSOC);
             return $res;
         } elseif ($table == "Cours") {
 
@@ -59,9 +53,9 @@ class Service
     public function find($table, $id)
     {
 
-        $requete = "select * from $table where id=:id";
+        $requete = "select * from $table where id=?";
         $res = $this->getPDO()->prepare($requete);
-        $res->execute(array(':id' => $id));
+        $res->execute(array($id));
         return $res;
     }
 
@@ -69,9 +63,9 @@ class Service
     public function add($objet)
     {
         if (get_class($objet) == "Utilisateur") {
-            $requete = "INSERT INTO Utilisateur (nom, prenom, mail, role, password,dateCreation) VALUE (?,?,?,?,?,?)";
+            $requete = "INSERT INTO Utilisateur (nom, prenom, mail, role, password,dateCreation,idFormation) VALUE (?,?,?,?,?,?,?)";
             $res = $this->getPDO()->prepare($requete);
-            $donnee = $res->execute(array($objet->getNom(), $objet->getPrenom(), $objet->getMail(),$objet->getRole(), $objet->getPassword(), $objet->getDateCreation()));
+            $donnee = $res->execute(array($objet->getNom(), $objet->getPrenom(), $objet->getMail(),$objet->getRole(), $objet->getPassword(), $objet->getDateCreation(),$objet->getFormation()));
             return $donnee;
         } 
         // elseif (get_class($objet) == "Boursier") {
