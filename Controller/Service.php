@@ -1,5 +1,7 @@
 <?php
 
+include 'Config.php';
+
 class Service
 {
     private $db_name;

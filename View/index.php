@@ -1,6 +1,5 @@
 <?php
 include '../Controller/Service.php';
-include '../Modele/Utilisateur.php';
 $test = new Service();
 $pdo = $test->getPDO();
 ?>
@@ -19,7 +18,7 @@ $pdo = $test->getPDO();
     <h2>Bienvenue dans votre plateforme e-learning</h2>
     <div class="container" id="container">
         <div class="form-container sign-up-container">
-            <form action="#" method="POST">
+            <form action="../Controller/Connexion.php" method="POST">
                 <h1>Creer Compte</h1>
                 <span>utilisez votre email pour vous inscrire</span>
                 <input class="input" type="text" name="nom" placeholder="Nom" required />
@@ -39,7 +38,7 @@ $pdo = $test->getPDO();
             </form>
         </div>
         <div class="form-container sign-in-container">
-            <form action="#" method="POST">
+            <form action="../Controller/Connexion.php" method="POST">
                 <h1>Connexion</h1>
                 <div class="social-container">
                     <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
@@ -47,8 +46,8 @@ $pdo = $test->getPDO();
                     <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
                 </div>
                 <span>Utiliser votre mail</span>
-                <input class="input" type="email" name="mail" placeholder="Email" />
-                <input class="input" type="password" name="pwd" placeholder="Password" />
+                <input class="input" type="email" name="login" placeholder="Email" />
+                <input class="input" type="password" name="mdp" placeholder="Password" />
                 <a href="#">Forgot your password?</a>
                 <input type="submit" class="button" name="connexion" value="Connexion">
             </form>
@@ -80,90 +79,4 @@ $pdo = $test->getPDO();
 </body>
 
 </html>
-
-<?php
-
-
-if (isset($_POST['inscrire'])) {
-    $nom = $_POST['nom'];
-    $prenom = $_POST['prenom'];
-    $mail = $_POST['mail'];
-    $pwd = $_POST['pwd'];
-    $pwd1 = $_POST['pwd1'];
-    $idformation = $_POST['formation'];
-
-    if ($pwd != $pwd1) {
-        echo "<script type='text/javascript'>alert('Les deux mots de passes ne sont pas conforme.');</script>";
-    } else {
-        $users = $test->findAll("Utilisateur");
-        while ($row = $users->fetch()) {
-            if (strtolower($row['mail']) == strtolower($mail)) {
-                return "<script type='text/javascript'>alert('Ce mail existe Déjà.');</script>";
-            }
-        }
-        $donnee=$test->find("Formation",$idformation);
-        $date = date_format(new DateTime('NOW'), 'Y-m-d H:i:s');
-        $formation=$donnee->fetch();
-        $user = new Utilisateur($nom, $prenom, $mail, "User", $pwd, $date,$formation['id']);
-        $insert = $test->add($user);
-        if ($insert) {
-            echo "<script type='text/javascript'>alert('Inscription réussi.');</script>";
-        } else {
-            echo "<script type='text/javascript'>alert('Oups!!! Erreur inattendue');</script>";
-        }
-    }
-}
-
-
-//     // include '../Classes/ServiceEtudiant.php';
-//     // $test = new Service();		
-//     if ($bourse == "NonBoursier") {
-//         $adresse=$_POST['adresse'];
-//         // $donne = new NonBoursier($matricule,$nom,$prenom,$tel,$mail,$ddn,$adresse);
-//         $insert = $test->add($donne);
-//         if ($insert) {
-//             echo "<h2 class='reponse'>INSERTION D'UN ETUDIANT NON BOURSIER RÉUSSIE</h2>";
-//         } else {
-//             echo "<h2 class='reponse'>CE MATRICULE EXISTE DEJA</h2>";
-//         }
-
-//     }
-//     else {
-//         $loger = $_POST['loger'];
-
-//         if ($bourse =="Boursier" && $loger=="NonLoger") {
-//             $type = $_POST['situation'];
-//             // $donnes = new Boursier($matricule,$nom,$prenom,$tel,$mail,$ddn,$type);
-//             $insert = $test->add($donnes);
-//             if ($insert) {
-//                 echo "<h2 class='reponse'>INSERTION D'UN ETUDIANT BOURSIER ET NON LOGER RÉUSSIE</h2>";
-//             } else {
-//                 echo "<h2 class='reponse'>CE MATRICULE EXISTE DEJA</h2>";
-//             }
-//         }
-
-//         elseif ($bourse =="Boursier" && $loger =="Loger") {
-//             $chambre = $_POST['chambre'];
-//             $batiment = $_POST['batiment'];
-//             $type = $_POST['situation'];
-//             // $donness = new Loger($matricule,$nom,$prenom,$tel,$mail,$ddn,$type,$chambre,$batiment);
-//             $insert = $test->add($donness);
-//             if ($insert) {
-//                 echo "<h2 class='reponse'>INSERTION D'UN ETUDIANT BOURSIER ET LOGER RÉUSSIE</h2>";
-//             } else {
-//                 echo "<h2 class='reponse'>CE MATRICULE EXISTE DEJA</h2>";
-//             }
-//         }	
-
-//     }
-// }else {
-//     $mail=$_POST['mail'];
-//     $pwd=$_POST['pwd'];
-// }
-
-
-
-?>
-
-
 <script src="script.js"></script>
