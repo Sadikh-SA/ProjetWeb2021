@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'Service.php';
 include '../Modele/Utilisateur.php';
 $test = new Service();
@@ -28,28 +29,29 @@ if (isset($_POST['inscrire'])) {
         $user = new Utilisateur($nom, $prenom, $mail, "User", $pwd, $date,$formation['id']);
         $insert = $test->add($user);
         if ($insert) {
-            echo "<script type='text/javascript'>alert('Inscription réussi.');</script>";
+            header('Location: ../View/PHP/AccueilUser.php');
+            exit();
         } else {
             echo "<script type='text/javascript'>alert('Oups!!! Erreur inattendue');</script>";
         }
     }
-}else {
+}elseif (isset($_POST['connexion'])) {
     $login = $_POST['login'];
     $mdp = $_POST['mdp'];
     $users = $test->findAll("Utilisateur");
     while ($row = $users->fetch()) {
         if (strtolower($row['mail']) == strtolower($login) && $row['password']==$mdp) {
+            $_SESSION['user']=$login;
+            $_SESSION['role']=$row['role'];
             if (strtolower($row['role'])==strtolower('Admin')) {
-                echo "<script type='text/javascript'>alert('Page Administrateur');</script>";
-                header('Location: ../View/index.php');
+                header('Location: ../View/PHP/AccueilAdmin.php');
                 exit();
             }
-            echo "<script type='text/javascript'>alert('Page Utilisateur');</script>";
-            header('Location: ../View/index.php');
+            header('Location: ../View/PHP/AccueilUser.php');
             exit();
         }
     }
     echo "<script type='text/javascript'>alert('Login ou Mot de Passe incorrecte.');</script>";
-    header('Location: ../View/index.php');
+    header('Location: ../View/PHP/index.php');
 }
 ?>

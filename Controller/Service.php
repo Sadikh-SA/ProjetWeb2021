@@ -27,27 +27,23 @@ class Service
         return $this->pdo;
     }
 
-    public function findAll($table)
+    public function findAll($table,$id=null)
     {
         if ($table == "Utilisateur" || "Formation") {
             $resultat = "SELECT * FROM $table";
             $res = $this->getPDO()->query($resultat);
             return $res;
         } elseif ($table == "Cours") {
-
-            $resultat = "SELECT matricule, nom, prenom, mail, tel, ddn FROM $table , Etudiant where $table.idEtu=Etudiant.idEtu";
+            $resultat = "SELECT * FROM $table where $table.idFormation=$id";
             $res = $this->getPDO()->query($resultat);
-            //$p = $res->fetchAll(pdo::FETCH_ASSOC);
             return $res;
         } elseif ($table == "Forum") {
             $resultat = "SELECT * FROM $table";
             $res = $this->getPDO()->query($resultat);
-            //$p = $res->fetchAll(pdo::FETCH_ASSOC);
             return $res;
         } elseif ($table == "Questions") {
             $resultat = "SELECT * FROM $table";
             $res = $this->getPDO()->query($resultat);
-            //$p = $res->fetchAll(pdo::FETCH_ASSOC);
             return $res;
         }
     }
