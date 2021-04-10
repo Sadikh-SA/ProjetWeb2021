@@ -25,10 +25,10 @@ if (!isset($_SESSION['user'])) {
   <header>
     <h1>E-Learning</h1>
     <nav>
-      <a href=#>Accueil</a>
-      <a href=#>Formation</a>
-      <a href=#>Cours</a>
-      <a href=#>Forum</a>
+      <a href="#">Accueil</a>
+      <a href="#">Formation</a>
+      <a href="Cours.php">Cours</a>
+      <a href="#">Forum</a>
       <a href=deconnexion.php>Déconnexion</a>
     </nav>
   </header>

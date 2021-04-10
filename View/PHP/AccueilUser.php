@@ -44,7 +44,8 @@ if (!isset($_SESSION['user'])) {
 
         </footer>
     </div>
-
+</body>
+</html>
 
     <!-- main
     figure(style='background-image: url(https://images.unsplash.com/photo-1593414220166-085caeae0382?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=751&q=80)')

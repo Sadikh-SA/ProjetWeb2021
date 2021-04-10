@@ -3,7 +3,6 @@ session_start();
 include 'Service.php';
 include '../Modele/Utilisateur.php';
 $test = new Service();
-$pdo = $test->getPDO();
 
 if (isset($_POST['inscrire'])) {
     $nom = $_POST['nom'];

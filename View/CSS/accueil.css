@@ -1,0 +1,72 @@
+.photo 
+{
+  float: left;
+  margin-left: 155px;
+  margin-right: 100px;
+  margin-top: 30px;
+  width:1100px;
+
+}
+
+.photo article
+{
+  float: left;
+  margin: 20px;
+      border-style:groove;
+      width:300px;
+height: 250px;  
+ background-color: whitesmoke; 
+}
+.photo h1{
+      text-align: center;
+}
+.photo p{
+      text-align: center;
+}
+.tete h1{
+    text-align: center;
+}
+.tete p{
+    text-align: center;
+}
+
+h1{
+  text-align: center;
+}
+
+div.gallery {
+  margin: 20px;
+  border: 1px solid #ccc;
+  float: left;
+  width: 380px;
+}
+
+div.gallery:hover {
+  border: 1px solid #777;
+}
+
+div.gallery img {
+  width: 100%;
+  max-width: 100%;
+  height: 190px;
+}
+
+div.desc {
+  padding: 15px;
+  text-align: center;
+  width: 90%;
+  height: 30px;
+}
+
+.container {
+  width: auto;
+  padding: 0;
+}
+.row {
+  margin-right: 0;
+  margin-left: 0;
+}
+.col {
+  padding-right: 0;
+  padding-left: 0;
+}

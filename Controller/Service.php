@@ -1,7 +1,4 @@
 <?php
-
-include 'Config.php';
-
 class Service
 {
     private $db_name;
@@ -23,38 +20,49 @@ class Service
             $pdo = new PDO('mysql:host=127.0.0.1;dbname=projetweb2021', 'root', 'Moimeme2018');
             $this->pdo = $pdo;
         }
-        //echo "true";
         return $this->pdo;
     }
 
-    public function findAll($table,$id=null)
+    //Cette fonction permet de rechercher tous les éléments d'une table
+    public function findAll($table)
     {
-        if ($table == "Utilisateur" || "Formation") {
+        $resultat = "SELECT * FROM $table";
+        $res = $this->getPDO()->query($resultat);
+        return $res;
+    }
+    //Cette fonction permet de rechercher les éléments en fonction des clés étrangers
+    public function findBy($table,$id=null)
+    {
+        if ($table == "Questions" || "Forum") {
             $resultat = "SELECT * FROM $table";
             $res = $this->getPDO()->query($resultat);
             return $res;
-        } elseif ($table == "Cours") {
+        } elseif ($table == "Cours" || "Utilisateur") {
             $resultat = "SELECT * FROM $table where $table.idFormation=$id";
             $res = $this->getPDO()->query($resultat);
             return $res;
-        } elseif ($table == "Forum") {
-            $resultat = "SELECT * FROM $table";
-            $res = $this->getPDO()->query($resultat);
-            return $res;
-        } elseif ($table == "Questions") {
-            $resultat = "SELECT * FROM $table";
+        } elseif ($table == "Chapitre") {
+            $resultat = "SELECT * FROM $table where $table.idCours=$id";
             $res = $this->getPDO()->query($resultat);
             return $res;
         }
     }
 
+    //Cette fonction permet de rechercher un élément dans un table
     public function find($table, $id)
     {
-
-        $requete = "select * from $table where id=?";
+        $requete = "select * from $table where id=:id";
         $res = $this->getPDO()->prepare($requete);
-        $res->execute(array($id));
+        $res->bindParam(":id",$id);
+        $res->execute();
         return $res;
+    }
+
+    public function longText($valeur,$limite){
+        if($valeur && strlen($valeur)>$limite){
+            return substr($valeur, 0, $limite).' ... ';
+        }
+        return $valeur;
     }
 
 
@@ -65,79 +73,22 @@ class Service
             $res = $this->getPDO()->prepare($requete);
             $donnee = $res->execute(array($objet->getNom(), $objet->getPrenom(), $objet->getMail(),$objet->getRole(), $objet->getPassword(), $objet->getDateCreation(),$objet->getFormation()));
             return $donnee;
-        } 
-        // elseif (get_class($objet) == "Boursier") {
-
-        //     if ($yx) {
-        //         $requete = "select idtype from Situation where libelle=:libelle";
-        //         $res = $this->getPDO()->prepare($requete);
-
-        //         $z = $res->execute(array(':libelle' => $objet->getLibelle()));
-        //         while ($row = $res->fetch()) {
-        //             $z = $row['idtype'];
-        //             break;
-        //         }
-        //         ////var_dump($z);
-
-        //         $requete = "INSERT INTO Boursier (idEtu,idtype) VALUE (?,?)";
-        //         $res = $this->getPDO()->prepare($requete);
-        //         ////var_dump($res);
-        //         $donnee = $res->execute(array($y, $z));
-        //         //$donnee = $res->fetch();
-        //         return $donnee;
-        //     }
-        // } elseif (get_class($objet) == "Loger") {
-        //     if ($yx) {
-        //         $requete = "select idtype from Situation where libelle=:libelle";
-        //         $res = $this->getPDO()->prepare($requete);
-
-        //         $z = $res->execute(array(':libelle' => $objet->getLibelle()));
-        //         while ($row = $res->fetch()) {
-        //             $z = $row['idtype'];
-        //             break;
-        //         }
-
-        //         $requete = "INSERT INTO Boursier (idEtu,idtype) VALUE (?,?)";
-        //         $res = $this->getPDO()->prepare($requete);
-        //         $res->execute(array($y, $z));
-
-        //         $res = $this->getPDO()->prepare("select idbour from Boursier order by idEtu DESC");
-        //         $idboursier = $res->execute(array());
-        //         while ($row = $res->fetch()) {
-        //             $idboursier = $row['idbour'];
-        //             break;
-        //         }
-
-        //         ////var_dump($idboursier);
-
-        //         $res = $this->getPDO()->prepare("select idbat from Batiment where numbat=:numbat");
-        //         $idbatiment = $res->execute(array(':numbat' => $objet->getBatiment()));
-
-        //         while ($row = $res->fetch()) {
-        //             $idbatiment = $row['idbat'];
-        //             break;
-        //         }
-
-        //         ////var_dump($idboursier);
-
-        //         $res = $this->getPDO()->prepare("select idcham from Chambre where numcham=:numcham and idbat=:idbat");
-        //         $idchambre = $res->execute(array(':numcham' => $objet->getChambre(), ':idbat' => $idbatiment));
-
-        //         while ($row = $res->fetch()) {
-        //             $idchambre = $row['idcham'];
-        //             break;
-        //         }
-
-        //         ////var_dump($idchambre);
-
-        //         $requete = "INSERT INTO Loger (idbour,idEtu, idcham) VALUE (?,?,?)";
-        //         $res = $this->getPDO()->prepare($requete);
-        //         $donnee = $res->execute(array($idboursier, $y, $idchambre));
-        //         ////var_dump($donnee);
-
-        //         return $donnee;
-        //     }
-        // }
+        }elseif (get_class($objet) == "Cours") {
+            $requete = "INSERT INTO Cours (nom, description, image,dateCreation,idFormation) VALUE (?,?,?,?,?)";
+            $res = $this->getPDO()->prepare($requete);
+            $donnee = $res->execute(array($objet->getNom(), $objet->getDescription(), $objet->getImage(), $objet->getDateCreation(),$objet->getFormation()));
+            return $donnee;
+        }elseif (get_class($objet) == "Chapitre") {
+            $requete = "INSERT INTO Chapitre (titre, type, images, videos, fichiers,dateCreation,idCous) VALUE (?,?,?,?,?,?,?)";
+            $res = $this->getPDO()->prepare($requete);
+            $donnee = $res->execute(array($objet->getTitre(), $objet->getType(), $objet->getImages(),$objet->getVideos(), $objet->getFichiers(), $objet->getDateCreation(),$objet->getCours()));
+            return $donnee;
+        }elseif (get_class($objet) == "Formation") {
+            $requete = "INSERT INTO Cours (titre, description,dateCreation) VALUE (?,?,?)";
+            $res = $this->getPDO()->prepare($requete);
+            $donnee = $res->execute(array($objet->getTitre(), $objet->getDescription(),$objet->getDateCreation()));
+            return $donnee;
+        }
     }
 
     public function findBoursier($table)
@@ -148,77 +99,6 @@ class Service
         //$donnee = $res->fetch(pdo::FETCH_ASSOC);
         return $res;
     }
-
-    public function addplus($table)
-    {
-        if ($table == "Batiment") {
-            $requete = "INSERT INTO $table (numbat) VALUE (?)";
-            $res = $this->getPDO()->prepare($requete);
-            $yx = $res->execute(array());
-        } else {
-            # code...
-        }
-    }
-
-    public function checkStatut($matricule)
-    {
-        $requete = "select * from ";
-        $res = $this->getPDO()->prepare($requete);
-        $res->execute();
-    }
-
-
-    public function statut($donnee) {
-        $requete = "select idEtu from Etudiant where matricule='$donnee'";
-        $res = $this->getPDO()->query($requete);
-        $donne = $res->fetch();
-        ////var_dump($donne['idEtu']);
-        $y = $donne['idEtu'];
-        $requete1 = "select idtype from Boursier where Boursier.idEtu=$y";
-
-        $res1 = $this->getPDO()->query($requete1);
-        $donne1 = $res1->fetch();
-        ////var_dump($donne1['idtype']);
-        $z =$donne1['idtype'];
-        if ($z==null) {
-            return "NonBouriser";
-        }
-        else{
-
-            $requete2 = "select libelle from Situation where Situation.idtype=$z";
-
-            $res2 = $this->getPDO()->query($requete2);
-            $donne2 = $res2->fetch();
-
-            ////var_dump($donne2['libelle']);
-            $g = $donne2['libelle'];
-
-            return $g;
-        }
-
-    }
-
-    public function chambre($e){
-        $requete = "select numcham from Chambre where idbat=$e";
-        $res = $this->getPDO()->query($requete);
-        $donne = $res->fetch();
-
-            ////var_dump($donne2['libelle']);
-            $g = $donne['numcham'];
-            //var_dump($g);
-            return $g;
-    }
-
-    /*
-        public function findAllBoursier()
-        {
-            $resultat = 'SELECT * FROM Boursier,Etudiant where Etudiant.idEtu=Boursier.idbour';
-            $res = $this->getPDO()->query($resultat);
-            $donnee = $res->fetchAll(PDO::FETCH_OBJ);
-            return $donnee;
-        }
-*/
-
 
     public function update(Utilisateur $objet , $id)
     {

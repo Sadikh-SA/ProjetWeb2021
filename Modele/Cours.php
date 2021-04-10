@@ -3,17 +3,18 @@
     class Cours {
 
         private $nom;
-        private $prenom;
-        private $tel;
-        private $mail;
-        private $role;
+        private $description;
+        private $image;
+        private $dateCreation;
+        private $idFormation;
 
-        public function __construct($nom="",$prenom="",$tel="",$mail="")
+        public function __construct($nom="",$description="",$image="",$dateCreation="",$idFormation)
         {
             $this->nom = $nom;
-            $this->prenom = $prenom;
-            $this->tel = $tel;
-            $this->mail = $mail;
+            $this->description = $description;
+            $this->image = $image;
+            $this->dateCreation = $dateCreation;
+            $this->idFormation = $idFormation;
         }
 
         public function getNom() {
@@ -23,34 +24,34 @@
         public function SetNom($newnom) {
             $this->nom = $newnom;
         }
-        public function getPrenom() {
-            return $this->prenom;
+        public function getDescription() {
+            return $this->description;
         }
         
-        public function SetPrenom($newprenom) {
-            $this->prenom = $newprenom;
+        public function SetDescription($newdescription) {
+            $this->description = $newdescription;
         }
-        public function getMail() {
-            return $this->mail;
-        }
-        
-        public function SetMail($newmail) {
-            $this->mail = $newmail;
-        }
-        public function getTel() {
-            return $this->tel;
+        public function getImage() {
+            return $this->image;
         }
         
-        public function SetTel($newtel) {
-            $this->tel = $newtel;
+        public function SetImages($newimage) {
+            $this->image = $newimage;
+        }
+        public function getDateCreation() {
+            return $this->dateCreation;
+        }
+        
+        public function SetDateCreation($newdateCreation) {
+            $this->dateCreation = $newdateCreation;
         }
 
-        public function getRole() {
-            return $this->role;
+        public function getFormation() {
+            return $this->idFormation;
         }
         
-        public function SetRole($newrole) {
-            $this->role = $newrole;
+        public function SetFormation($newFormation) {
+            $this->idFormation = $newFormation;
         }
 
     }
