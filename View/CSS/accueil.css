@@ -57,16 +57,3 @@ div.desc {
   width: 90%;
   height: 30px;
 }
-
-.container {
-  width: auto;
-  padding: 0;
-}
-.row {
-  margin-right: 0;
-  margin-left: 0;
-}
-.col {
-  padding-right: 0;
-  padding-left: 0;
-}

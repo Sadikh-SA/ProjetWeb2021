@@ -37,13 +37,6 @@
                 echo '</div>';
             }
         ?>
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                        <p>azertyuiop</p>
-                </div>
-            </div>
-        </div>
 
     <!-- </div> -->
 </body>
