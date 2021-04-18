@@ -42,11 +42,7 @@ if (isset($_POST['inscrire'])) {
         if (strtolower($row['mail']) == strtolower($login) && $row['password']==$mdp) {
             $_SESSION['user']=$login;
             $_SESSION['role']=$row['role'];
-            if (strtolower($row['role'])==strtolower('Admin')) {
-                header('Location: ../View/PHP/AccueilAdmin.php');
-                exit();
-            }
-            header('Location: ../View/PHP/AccueilUser.php');
+            header('Location: ../View/PHP/Cours.php');
             exit();
         }
     }
