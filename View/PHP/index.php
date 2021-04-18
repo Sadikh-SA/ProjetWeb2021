@@ -1,5 +1,13 @@
 <?php
-include '../Controller/Service.php';
+session_start();
+if (isset($_SESSION['role']) && $_SESSION['role']=="User") {
+    header('Location: AccueilUser.php');
+    exit();
+}elseif (isset($_SESSION['role']) && $_SESSION['role']=="Admin") {
+    header('Location: AccueilAdmin.php');
+    exit();
+}
+include '../../Controller/Service.php';
 $test = new Service();
 $pdo = $test->getPDO();
 ?>
@@ -11,14 +19,14 @@ $pdo = $test->getPDO();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projet Web - 2021</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../CSS/style.css">
 </head>
 
 <body onload="">
     <h2>Bienvenue dans votre plateforme e-learning</h2>
     <div class="container" id="container">
         <div class="form-container sign-up-container">
-            <form action="../Controller/Connexion.php" method="POST">
+            <form action="../../Controller/Connexion.php" method="POST">
                 <h1>Creer Compte</h1>
                 <span>utilisez votre email pour vous inscrire</span>
                 <input class="input" type="text" name="nom" placeholder="Nom" required />
@@ -38,7 +46,7 @@ $pdo = $test->getPDO();
             </form>
         </div>
         <div class="form-container sign-in-container">
-            <form action="../Controller/Connexion.php" method="POST">
+            <form action="../../Controller/Connexion.php" method="POST">
                 <h1>Connexion</h1>
                 <div class="social-container">
                     <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
@@ -79,4 +87,4 @@ $pdo = $test->getPDO();
 </body>
 
 </html>
-<script src="script.js"></script>
+<script src="../JS/script.js"></script>
