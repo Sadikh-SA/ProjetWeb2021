@@ -8,7 +8,7 @@
         private $mail;
         private $role;
 
-        public function __construct($nom="",$prenom="",$tel="",$mail="",$role)
+        public function __construct($nom="",$prenom="",$tel="",$mail="",$role="")
         {
             $this->nom = $nom;
             $this->prenom = $prenom;

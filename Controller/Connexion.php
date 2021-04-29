@@ -28,7 +28,8 @@ if (isset($_POST['inscrire'])) {
         $user = new Utilisateur($nom, $prenom, $mail, "User", $pwd, $date,$formation['id']);
         $insert = $test->add($user);
         if ($insert) {
-            header('Location: ../View/PHP/AccueilUser.php');
+            $_SESSION['formation']=$formation['id'];
+            header('Location: ../View/PHP/Cours.php');
             exit();
         } else {
             echo "<script type='text/javascript'>alert('Oups!!! Erreur inattendue');</script>";
@@ -42,6 +43,7 @@ if (isset($_POST['inscrire'])) {
         if (strtolower($row['mail']) == strtolower($login) && $row['password']==$mdp) {
             $_SESSION['user']=$login;
             $_SESSION['role']=$row['role'];
+            $_SESSION['formation']=$row['idFormation'];
             header('Location: ../View/PHP/Cours.php');
             exit();
         }

@@ -13,23 +13,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/styleMenu.css">
     <link rel="stylesheet" href="../CSS/cours.css">
     <title>Les Cours</title>
 </head>
 
 <body>
     <?php
-        if ($_SESSION['role']!='User') {
-            echo '<header>'.
-                    '<h1>E-Learning</h1>'.
-                    '<nav>'.
-                        '<a href="#">Accueil</a>'.
-                        '<a href="#">Formation</a>'.
-                        '<a href="Cours.php">Cours</a>'.
-                        '<a href="deconnexion.php">Déconnexion</a>'.
-                    '</nav>'.
-                '</header>';
-        }
+        require_once("header.php");
         
         /* Trigger/Open The Modal */
         if ($_SESSION['role']!="User") {
@@ -37,7 +28,7 @@
         }
     ?>
 
-    <!-- The Modal -->
+    <!-- The Modal pour ajouter cours-->
     <div id="myModal" class="modal">
 
         <!-- Modal content -->
@@ -69,19 +60,11 @@
         </div>
 
     </div>
-
     <?php
-    $form = $test->findBy("Cours", 1);
+    $form = $test->findBy("Cours", $_SESSION['formation']);
     while ($row = $form->fetch()) {
-        // echo '<a href="#">';
-        //     echo '<article >';
-        //         echo '<img src="../../Media/'.$row['image'].'"/><br>';
-        //         echo '<h1>'.$row['nom'].'</h1>';
-        //         echo '<p>'.$row['description'].'</p>';
-        //     echo '</article>';
-        // echo '</a>';
         echo '<div class="gallery">';
-        echo '<a target="_blank" href="#">';
+        echo '<a href="Chapitre.php?cours='.$row['id'].'">';
         echo '<img src="../../Media/' . $row['image'] . '" alt="' . $row['nom'] . '" width="600" height="400">';
         echo '</a>';
         echo '<h1>' . $row['nom'] . '</h1>';

@@ -8,7 +8,7 @@
         private $dateCreation;
         private $idFormation;
 
-        public function __construct($nom="",$description="",$image="",$dateCreation="",$idFormation)
+        public function __construct($nom="",$description="",$image="",$dateCreation="",$idFormation="")
         {
             $this->nom = $nom;
             $this->description = $description;
