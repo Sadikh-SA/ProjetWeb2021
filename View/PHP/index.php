@@ -1,10 +1,7 @@
 <?php
 session_start();
-if (isset($_SESSION['role']) && $_SESSION['role']=="User") {
-    header('Location: AccueilUser.php');
-    exit();
-}elseif (isset($_SESSION['role']) && $_SESSION['role']=="Admin") {
-    header('Location: AccueilAdmin.php');
+if (isset($_SESSION['role'])) {
+    header('Location: Cours.php');
     exit();
 }
 include '../../Controller/Service.php';
@@ -49,9 +46,9 @@ $pdo = $test->getPDO();
             <form action="../../Controller/Connexion.php" method="POST">
                 <h1>Connexion</h1>
                 <div class="social-container">
-                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social"><em class="fab fa-facebook-f"></em></a>
+                    <a href="#" class="social"><em class="fab fa-google-plus-g"></em></a>
+                    <a href="#" class="social"><em class="fab fa-linkedin-in"></em></a>
                 </div>
                 <span>Utiliser votre mail</span>
                 <input class="input" type="email" name="login" placeholder="Email" />
@@ -78,7 +75,7 @@ $pdo = $test->getPDO();
 
     <footer>
         <p>
-            Created with <i class="fa fa-heart"></i> by
+            Created with <em class="fa fa-heart"></em> by
             <a target="_blank" href="https://florin-pop.com">Florin Pop</a>
             - Read how I created this and how you can join the challenge
             <a target="_blank" href="https://www.florin-pop.com/blog/2019/03/double-slider-sign-in-up-form/">here</a>.

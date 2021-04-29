@@ -1,22 +1,22 @@
 <?php
 
-    class Cours {
+    class Chapitre {
 
         private $titre;
-        private $type;
-        private $images;
+        private $description;
         private $videos;
         private $fichiers;
+        private $questionnaire;
         private $dateCreation;
         private $idCours;
 
-        public function __construct($titre="",$type="",$images="",$videos="",$fichiers="",$dateCreation="",$idCours)
+        public function __construct($titre="",$description="",$videos="",$fichiers="",$questionnaire="",$dateCreation="",$idCours="")
         {
             $this->titre = $titre;
-            $this->type = $type;
-            $this->images = $images;
+            $this->description = $description;
             $this->videos = $videos;
             $this->fichiers = $fichiers;
+            $this->questionnaire = $questionnaire;
             $this->dateCreation = $dateCreation;
             $this->idCours = $idCours;
         }
@@ -28,18 +28,18 @@
         public function SetTitre($newtitre) {
             $this->titre = $newtitre;
         }
-        public function getType() {
-            return $this->type;
+        public function getDescription() {
+            return $this->description;
         }
         
-        public function SetType($newtype) {
-            $this->type = $newtype;
+        public function SetDescription($newdescription) {
+            $this->description = $newdescription;
         }
-        public function getImages() {
-            return $this->images;
+        public function getQuestionnaire() {
+            return $this->questionnaire;
         }
-        public function SetImages($newimage) {
-            $this->images = $newimage;
+        public function SetQuestionnaire($newqcm) {
+            $this->questionnaire = $newqcm;
         }
         public function getVideos() {
             return $this->videos;

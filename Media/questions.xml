@@ -1,0 +1,175 @@
+<data>
+  <easy>
+    <question>
+      <title><![CDATA[
+        Pour définir un titre DANS une page HTML, on utilise...
+      ]]></title>
+      <option>L'élément title</option>
+      <option>L'élément head</option>
+      <option>Un élément h1, h2, ... h6</option>
+      <answer>3</answer>
+    </question>
+
+    <question>
+      <title><![CDATA[
+        Lorsque vous utilisez l'élément a, vous devez obligatoirement préciser...
+      ]]></title>
+      <option>Un attribut target</option>
+      <option>Un attribut href</option>
+      <option>Deux attributs href et target</option>
+      <answer>2</answer>
+    </question>
+
+    <question>
+      <title><![CDATA[
+      Pour indiquer qu'un contenu est très important, on utilise l'élément...
+      ]]></title>
+      <option>Strong</option>
+      <option>Em</option>
+      <option>Mark</option>
+      <answer>1</answer>
+    </question>
+
+    <question>
+      <title><![CDATA[
+      Que signifie CSS ?
+      ]]></title>
+      <option>Cascading Style Sheets </option>
+      <option>Create Simple Samples</option>
+      <option>Choucroute et Saucisses d'Alsace</option>
+      <answer>1</answer>
+    </question>
+
+    <question>
+     <title><![CDATA[
+      A quoi sert le langage CSS ?
+      ]]></title>
+      <option>A réaliser des pages dynamiques</option>
+      <option>A ajouter du style aux documents web</option>
+      <option>A insérer du contenu dans une page internet</option>
+      <answer>2</answer>
+    </question>
+
+
+   
+
+  
+  </easy>
+
+  <medium>
+   
+
+  
+   <question>
+      <title><![CDATA[
+       Comment faire pour qu'une div prenne toute la largeur disponible dans son bloc conteneur ?
+      ]]></title>
+      <option> div {width: 100%; padding: 10%;}</option>
+      <option>div {width: 740px; padding: 1em; border-width: 0; margin: 0;}</option>
+      <option>div {width: 720px; padding: 5px; border-width: 5px; margin: 10px;}</option>
+       <option> div {width: 700px; padding: 29px; border-width: 1px; margin: 0;}</option>
+      <answer>4</answer>
+    </question>
+
+    <question>
+      <title><![CDATA[
+    Comment faire pour qu'une div prenne toute la largeur disponible dans son bloc conteneur ?
+      ]]></title>
+       <option> div {width: 100%; padding: 10%;}</option>
+      <option>div {min-width: 100%;}</option>
+      <option>div {width: 80%; padding: 10%;}</option>
+       <option> C'est automatique, pas besoin de spécifier une largeur.</option>
+      <answer>4</answer>
+    </question>
+
+     <question>
+      <title><![CDATA[
+      Dans quel ordre doit-on placer, dans le code HTML, deux éléments que l'on veut placer côte à côte, en sachant qu'un seul de ces éléments sera flottant ?
+      ]]></title>
+      <option>L'élément non flottant d'abord, puis l'élément flottant.</option>
+      <option>L'élément flottant d'abord, puis l'élément non flottant.</option>
+      <option>Peu importe l'ordre, il n'y aura pas de différence. </option>
+      <answer>2</answer>
+    </question>
+
+    
+    <question>
+     <title><![CDATA[
+    À partir de quelle version d'Internet Explorer peut-on utiliser nativement les éléments de section HTML5 (sans hack ou script complémentaire) ?
+      ]]></title>
+      <option>Internet Explorer 8</option>
+      <option>Internet Explorer 9</option>
+      <option>Internet Explorer 10</option>
+      <answer>2</answer>
+    </question>
+
+    <question>
+      <title><![CDATA[
+     A quoi sert l'attribut alt de l'élément img ?
+      ]]></title>
+      <option>A donner une description de l'image si celle-ci ne peut pas s'afficher</option>
+      <option>A donner un lien alternatif vers l'image si le premier est cassé</option>
+      <option>A afficher une deuxième image si la première ne peut pas s'afficher</option>
+      <answer>1</answer>
+    </question>
+
+    
+    
+  </medium>
+
+  <hard>
+   
+    <question>
+      <title><![CDATA[
+       Quelle balise doit permettre l'inclusion de sous-titres textes dans les vidéos lues avec <video> ?
+      ]]></title>
+      <option>track src="soustitres.vtt"</option>
+      <option>subtitle source="soustitres.srt"</option>
+      <option> captions source="soustitres.srt"</option>
+      <answer>1</answer>
+    </question>
+
+    <question>
+      <title><![CDATA[
+     Quel attribut permet d'afficher une image par défaut pour l'élément <video> ?
+      ]]></title>
+      <option>video preview="apercu.jpg"</option>
+      <option>video poster="apercu.jpg"</option>
+      <answer>2</answer>
+    </question>
+
+    <question>
+      <title><![CDATA[
+       Qu'est-ce qu'un doctype ?
+      ]]></title>
+      <option>Un document type</option>
+      <option>Déclarer le type de document aux normes du W3C</option>
+      <option>Permet de déclarer le type d'affichage du CSS utilisé.</option>
+      <answer>2</answer>
+    </question>
+
+    <question>
+      <title><![CDATA[
+       Quelle est la méthode conseillée pour limiter l'application d'une ou plusieurs règles CSS à Internet Explorer 6 ?
+      ]]></title>
+      <option>L'utilisation de la déclaration "!important".</option>
+      <option>La préfixation du sélecteur par "* html".</option>
+      <option>La préfixation du sélecteur par "html > body".</option>
+      <option>Aucune des solutions précédentes.</option>
+      <answer>4</answer>
+    </question>
+
+    <question>
+      <title><![CDATA[
+       Si j'écris a:active {color: red;} dans ma feuille de style, quels liens seront de couleur rouge ?
+      ]]></title>
+      <option>les liens pointant vers des pages mises à jour régulièrement</option>
+      <option>les liens pointant vers la page en cours (par exemple dans un menu de navigation)</option>
+      <option>n'importe quel lien de la page, mais uniquement au moment où on clique sur ce lien</option>
+      <option>n'importe quel lien de la page, mais uniquement au moment où on survole ce lien avec le pointeur de la souris</option>
+      <answer>3</answer>
+    </question>
+
+  
+  </hard>
+</data>
