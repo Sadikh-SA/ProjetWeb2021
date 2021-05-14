@@ -83,7 +83,15 @@ if (isset($_POST["addCours"])) {
         } else {
             echo "<script type='text/javascript'>alert('Oups!!! Erreur inattendue');</script>";
         }
-    // } else {
-    //     echo "Error: Il y a eu un problème de téléchargement de votre fichier. Veuillez réessayer.";
-    // }
+}
+elseif (isset($_POST["delCours"])) {
+    $cours=$_POST["coursdel"];
+    $del=$test->supprimer("Cours",$cours);
+    if ($del==null) {
+       echo "Suppression";
+       header('Location: ../View/PHP/Cours.php');
+    } else {
+        echo "<script type='text/javascript'>alert('Oups!!! Impossible de Supprimer');</script>";
+    }
+    
 }

@@ -7,7 +7,8 @@
     $ident=$_GET["ident"];
     include '../../Controller/Service.php';
     $test = new Service();
-    $form = $test->find("Questionnaire", $ident);
+    $form = $test->find("Chapitre", $ident);
+    $form = $form->fetch();
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +21,7 @@
 
 <body>
 
-  <form class="box" method="POST" action="#">
+  <form class="box" method="POST" action="">
     <?php
     $total_questions = 5;
     $total_easy = 5;
@@ -29,7 +30,7 @@
 
     if (isset($_POST['finish'])) {
       //Finished
-      $data = simplexml_load_file("../../Media/".$form['fichiers']."");
+      $data = simplexml_load_file("../../Media/".$form['questionnaire']."");
       $answer = $_POST['answer'];
       $difficulty = $_POST['difficulty'];
       $old_easy = $_POST['old-easy'];
@@ -86,7 +87,7 @@
       echo ($ret);
     } else if (isset($_POST['start'])) {
       //First question
-      $data = simplexml_load_file("../../Media/".$form['fichiers']."");
+      $data = simplexml_load_file("../../Media/".$form['questionnaire']."");
 
       $index = $_POST['index'];
 
@@ -112,7 +113,7 @@
       echo ($ret);
     } else if (isset($_POST['next'])) {
       //Next question
-      $data = simplexml_load_file("../../Media/".$form['fichiers']."");
+      $data = simplexml_load_file("../../Media/".$form['questionnaire']."");
       $index = $_POST['index'];
       $answer = $_POST['answer'];
       $difficulty = $_POST['difficulty'];
@@ -186,3 +187,9 @@
 </body>
 
 </html>
+
+<script>
+  if (localStorage.getItem("couleur")) {
+        document.body.style.backgroundColor=localStorage.getItem("couleur");
+    }
+</script>

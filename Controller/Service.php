@@ -37,7 +37,7 @@ class Service
             }else {
                 $resultat = "SELECT * FROM $table where idFormation=$id";
             }
-        } elseif ($table == "Chapitre") {
+        } elseif ($table == "Chapitre" || $table == "Discussion") {
             $resultat = "SELECT * FROM $table where idCours=$id";     
         }
         return $this->getPDO()->query($resultat);
@@ -49,6 +49,16 @@ class Service
         $requete = "select * from $table where id=:id";
         $res = $this->getPDO()->prepare($requete);
         $res->bindParam(":id",$id);
+        $res->execute();
+        return $res;
+    }
+
+    //Cette fonction permet de rechercher un élément dans un table
+    public function finds($id)
+    {
+        $requete = "select * from Utilisateur where mail=:mail";
+        $res = $this->getPDO()->prepare($requete);
+        $res->bindParam(":mail",$id);
         $res->execute();
         return $res;
     }
@@ -84,6 +94,10 @@ class Service
             $requete = "INSERT INTO Niveau (fichiers,idUtilisateur,idChapitre,dateCreation) VALUE (?,?,?,?)";
             $res = $this->getPDO()->prepare($requete);
             $donnee = $res->execute(array($objet->getFichiers(), $objet->getUtilisateur(), $objet->getChapitre(),$objet->getDateCreation()));
+        }elseif (get_class($objet) == "Discussion") {
+            $requete = "INSERT INTO Discussion (idCours,idUtilisateur,message,dateCreation) VALUE (?,?,?,?)";
+            $res = $this->getPDO()->prepare($requete);
+            $donnee = $res->execute(array($objet->getIdCours(), $objet->getUsers(), $objet->getMessage(),$objet->getDateCreation()));
         }
         return $donnee;
     }
@@ -96,72 +110,25 @@ class Service
         return $res;
     }
 
-    public function update(Utilisateur $objet , $id)
+    public function update($objet , $id, $test)
     {
-        $requete = "UPDATE Etudiant SET matricule=:matricule, nom=:nom, prenom=:prenom, mail=:mail, password=:password, ddn=:ddn where matricule=:matricule1";
-        $res = $this->getPDO()->prepare($requete);
-        $donne = $res->execute(array(':nom' => $objet->getNom(), ':prenom' => $objet->getPrenom(), ':password' => $objet->getPassword(), ':mail' => $objet->getMail(),':role' => $objet->getRole(),  ':ddn' => $objet->getDateCreation()));
-        
-        $pre = $this->getPDO()->prepare("SELECT id from Utilisateur where id=:id");
-        $y = $pre->execute(array(':id' => $id));
-        // if (get_class($objet) == "NonBoursier") {
-
-        //     $pres = $this->getPDO()->prepare("select * from Loger where Loger.idEtu=:idEtu");
-        //     $moi = $pres->execute(array(':idEtu' => $y));
-        //     $log=$moi;
-        //     while ($row = $pre->fetch()) {
-        //         $log = $row['idEtu'];
-        //         //break;
-        //     }
-        //     ////var_dump($log);
-            
-        //     $pre = $this->getPDO()->prepare("select * from Boursier where Boursier.idEtu=:idEtu");
-        //     $zx = $pre->execute(array(':idEtu' => $y));
-        //     $z=$zx;
-        //     while ($row = $pre->fetch()) {
-        //         $z = $row['idEtu'];
-        //         //break;
-        //     }
-        //     ////var_dump($z);
-
-        //     if ($z!=0 || $z!=NULL) {
-        //         if ($log!=null || $log!=0) {
-        //             $requete = "DELETE FROM Loger where idEtu=:idEtu";
-        //             $stmt = $this->getPDO()->prepare($requete);
-        //             $resu = $stmt->execute(array(':idEtu' =>$log));
-        //             ////var_dump($resu);
-        //         }
-        //         $requete = "DELETE FROM Boursier where idEtu=:idEtu";
-        //         $stmt = $this->getPDO()->prepare($requete);
-        //         $resu = $stmt->execute(array(':idEtu' =>$z));
-        //         ////var_dump($resu);
-
-        //         $requete = "INSERT INTO NonBoursier SET idEtu=:idEtu, Adresse=:Adresse";
-        //         $res = $this->getPDO()->prepare($requete);
-        //         $donnee = $res->execute(array(':idEtu' => $y, ':Adresse' => $objet->getAdresse()));
-        //         return $donnee;
-        //     } else {
-        //         $pre = $this->getPDO()->prepare("select * from NonBoursier where NonBoursier.idEtu=:idEtu");
-        //         $zx = $pre->execute(array(':idEtu' => $y));
-        //         $z=$zx;
-        //         while ($row = $pre->fetch()) {
-        //             $z = $row['idnob'];
-        //             //break;
-        //         }
-        //         ////var_dump($z);
-        //         if ($zx) {
-        //             $requete = "UPDATE NonBoursier SET idEtu=:idEtu, Adresse=:Adresse where idnob=:idnob";
-        //             $res = $this->getPDO()->prepare($requete);
-        //             $donne = $res->execute(array(':idnob' => $z, ':idEtu' => $y, ':Adresse' => $objet->getAdresse()));
-        //             ////var_dump($donne);
-        //         }   
-        //     }
-        // }
+        $donne = '';
+        if ($test == "Profil") {
+            $requete = "UPDATE Utilisateur SET nom=:nom, prenom=:prenom, mail=:mail, role=:role,type=:type, password=:password, dateCreation=:ddn where id=:id";
+            $res = $this->getPDO()->prepare($requete);
+            $donne = $res->execute(array(':nom' => $objet->getNom(), ':prenom' => $objet->getPrenom(),':mail' => $objet->getMail(),':role' => $objet->getRole(),':type' => $objet->getType(), ':password' => $objet->getPassword(),':ddn' => $objet->getDateCreation(),':id' => $id));
+        }
+        elseif ($test == "Bloquer") {
+            $requete = "UPDATE Utilisateur SET type=:type where id=:id";
+            $res = $this->getPDO()->prepare($requete);
+            $donne = $res->execute(array(':type' => false,':id' => $id));
+        }  
+        return $donne;
     }
 
-    public function supprimer($matricule) {
-        $requete = "DELETE FROM Etudiant WHERE matricule=:matricule";
+    public function supprimer($table,$id) {
+        $requete = "DELETE FROM $table WHERE id=:id";
         $res = $this->getPDO()->prepare($requete);
-        $res->execute(array(':matricule' => $matricule));
+        $res->execute(array(':id' => $id));
     }
 }

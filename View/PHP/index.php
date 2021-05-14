@@ -53,21 +53,21 @@ $pdo = $test->getPDO();
                 <span>Utiliser votre mail</span>
                 <input class="input" type="email" name="login" placeholder="Email" />
                 <input class="input" type="password" name="mdp" placeholder="Password" />
-                <a href="#">Forgot your password?</a>
+                <a href="#">Mot de passe oublié?</a>
                 <input type="submit" class="button" name="connexion" value="Connexion">
             </form>
         </div>
         <div class="overlay-container">
             <div class="overlay">
                 <div class="overlay-panel overlay-left">
-                    <h1>Welcome Back!</h1>
-                    <p>To keep connected with us please login with your personal info</p>
-                    <button class="ghost button" id="signIn">Sign In</button>
+                    <h1>Rebienvenue!</h1>
+                    <p>Plateforme de E-learning pour des formations enrichissantes</p>
+                    <button class="ghost button" id="signIn">Connecter</button>
                 </div>
                 <div class="overlay-panel overlay-right">
-                    <h1>Hello, Friend!</h1>
-                    <p>Enter your personal details and start journey with us</p>
-                    <button class="ghost button" id="signUp">Sign Up</button>
+                    <h1>Bienvenue le nouveau</h1>
+                    <p>Entre tes informations pour bénéficier des formations enrichissantes</p>
+                    <button class="ghost button" id="signUp">Inscrire</button>
                 </div>
             </div>
         </div>
@@ -75,13 +75,18 @@ $pdo = $test->getPDO();
 
     <footer>
         <p>
-            Created with <em class="fa fa-heart"></em> by
-            <a target="_blank" href="https://florin-pop.com">Florin Pop</a>
-            - Read how I created this and how you can join the challenge
-            <a target="_blank" href="https://www.florin-pop.com/blog/2019/03/double-slider-sign-in-up-form/">here</a>.
+            créer <em class="fa fa-heart"></em> par
+            <a target="_blank" href="https://github.com/Sadikh-SA">Sadikh</a>
+            - informations me concernant voila un lien
+            <a target="_blank" href="https://github.com/Sadikh-SA">ici</a>.
         </p>
     </footer>
 </body>
 
 </html>
 <script src="../JS/script.js"></script>
+<script>
+    if (localStorage.getItem("couleur")) {
+        document.body.style.backgroundColor=localStorage.getItem("couleur");
+    }
+</script>

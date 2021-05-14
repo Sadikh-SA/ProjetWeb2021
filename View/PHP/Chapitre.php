@@ -25,8 +25,7 @@ $test = new Service();
 
     /* Trigger/Open The Modal */
     if ($_SESSION['role'] != "User") {
-        echo '<div><button id="myBtn" class="button" style="float: right;margin-right: 12%">Ajouter Chapitre</button>'.
-        '<button id="myBtns" class="button" style="float: right;">Ajouter QCM</button></div><br><br><br><br>';
+        echo '<div><button id="myBtn" class="button" style="float: right;margin-right: 12%">Ajouter Chapitre</button></div><br><br><br><br>';
     }
     ?>
     <!-- The Modal pour ajouter cours-->
@@ -58,7 +57,7 @@ $test = new Service();
     $form = $test->findBy("Chapitre", $_GET['cours']);
     $_SESSION['cours']=$_GET['cours'];
     while ($row = $form->fetch()) {
-        echo "<a href='page.php?chapitre=" . $row['id'] . "'><div style='padding: 28px 17px; border: #FF416C solid; background: none no-repeat scroll 15px 50%; width: 60%; margin: 0 auto; border-radius: 12px;  text-align: center'>Chapitre " . $row['id'] . "</div></a>";
+        echo "<a href='page.php?chapitre=" . $row['id'] . "'><div style='padding: 28px 17px; border: #FF416C solid; background: none no-repeat scroll 15px 50%; width: 60%; margin: 0 auto; border-radius: 12px;  text-align: center'>" . $row['titre'] . "</div></a>";
     }
     ?>
 
@@ -91,5 +90,8 @@ $test = new Service();
         if (event.target == modal) {
             modal.style.display = "none";
         }
+    }
+    if (localStorage.getItem("couleur")) {
+        document.body.style.backgroundColor=localStorage.getItem("couleur");
     }
 </script>

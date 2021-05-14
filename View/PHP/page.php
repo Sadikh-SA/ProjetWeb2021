@@ -23,12 +23,14 @@
   $row = $test->find("Chapitre", $chapitre);
   $form = $row->fetch();
   $all = $test->findBy("Chapitre",$_SESSION["cours"]);
+  $cours = $test->find("Cours",$form['idCours']);
+  $idCours=$cours->fetch();
 ?>
 
   <form method="POST" action="#">
     <header style="border-bottom: ridge">
       <div class="log">
-        <img src="../../Media/html.png" alt="Image cours">
+       <?php echo'<a href="Cours.php"><img src="../../Media/'.$idCours['image'].'" alt="Image cours"></a>'; ?>
       </div>
       <div class="logo">
         <input type="search" id="recherche" name="s" placeholder="recherche">
@@ -140,5 +142,8 @@
         if (event.target == modal) {
             modal.style.display = "none";
         }
+    }
+    if (localStorage.getItem("couleur")) {
+        document.body.style.backgroundColor=localStorage.getItem("couleur");
     }
 </script>

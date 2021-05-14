@@ -16,7 +16,7 @@ html, body{
   background-color: #2B2B2B;
   color: white;
   text-align: center;
-  margin-top: 60px;
+  margin-top: 20px;
   padding-bottom: 30px;
 }
 
@@ -99,7 +99,7 @@ html, body{
 }
 
 .page-title{
-  margin-top: 100px;
+  margin-top: 10px;
   font-size: 40px;
   font-family: "NunitoBold";
 }
@@ -115,7 +115,7 @@ html, body{
 .title{
   font-family: "NunitoSemiBold";
   font-size: 27px;
-  margin-top: 50px;
+  margin-top: 10px;
   margin-bottom: 30px;
 }
 
@@ -149,7 +149,7 @@ html, body{
   width: 50%;
   margin-left: -25%;
   text-align: left;
-  padding: 0px 40px 25px 40px;
+  padding: 0px 20px 15px 20px;
   box-sizing: border-box;
   user-select: none;
 }
